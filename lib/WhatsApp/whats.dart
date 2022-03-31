@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
-class whats extends StatelessWidget{
+class whats extends StatefulWidget{
+  TextEditingController contrlolText=TextEditingController();
+  String newText='';
+
+  @override
+  State<whats> createState() => _whatsState();
+}
+
+class _whatsState extends State<whats> {
   @override
   Widget build(BuildContext context) {
     return(
@@ -60,7 +68,7 @@ class whats extends StatelessWidget{
                                 color: Colors.white
                             )
                         ),
-                        child: Text('Hi how are you ? ', style: TextStyle(color: Colors.white , fontSize: 20),),
+                        child: Text(widget.newText, style: TextStyle(color: Colors.white , fontSize: 20),),
 
                       )
                     ],
@@ -101,7 +109,9 @@ class whats extends StatelessWidget{
                             color: Colors.white
                         )
                         ),
-                          child: TextField(
+                          child: TextFormField(
+                            controller:widget.contrlolText ,
+                            style:TextStyle(color: Colors.white,fontSize: 20  ),
                             decoration: InputDecoration(
                                 hintText: 'Type a Massage' ,
                                 hintStyle:TextStyle(
@@ -126,7 +136,12 @@ class whats extends StatelessWidget{
                           ),
                           child: CircleAvatar(radius: 30,
                             backgroundColor: Colors.black,
-                            child: Icon(Icons.mic , color: Colors.white,),
+                            child: IconButton(
+                              onPressed: (){
+                             widget.newText=widget.contrlolText.text;
+
+                              },
+                              icon: Icon(Icons.send),),
                           ),
                         ),
                       )
